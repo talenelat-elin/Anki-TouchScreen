@@ -1,3 +1,13 @@
+## My own changes
+1. Changed the size of the `canvas_wrapper` element to zero because it was interfering with selection even when canvas was not displayed.
+2. Changed the resize function so it doesn't keep continously increasing the width and height of the canvas element.
+3. Changed the location of the buttons to the bottom-right corner.
+4. Added keyboard shortcuts via `eventListener` for all three buttons.
+  1. `'` for Toggle Visibility.
+  2. `,` for undo.
+  3. `.` for clean whiteboard.
+5. Made the canvas element have a crosshair cursor.
+
 # Anki-TouchScreen
 Touch screen functionality for Anki
 
