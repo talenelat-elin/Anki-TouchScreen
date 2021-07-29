@@ -182,7 +182,7 @@ def ts_onload():
 
 ts_blackboard = u"""
 <div id="canvas_wrapper">
-    <canvas id="main_canvas" width="100" height="100"></canvas>
+    <canvas id="main_canvas" width="100" height="100" style="display: none; cursor: crosshair;"></canvas>
 </div>
 <div id="pencil_button_bar">
     <input type="button" class="active" onclick="active=!active;switch_visibility();switch_class(this, 'active');" value="\u270D" title="Toggle visiblity">
@@ -202,29 +202,22 @@ ts_blackboard = u"""
 }
 .night_mode #pencil_button_bar input[type=button].active
 {
-    -webkit-filter: grayscale(0);
-    filter: none;
     color: #fff!important;
 }
 #pencil_button_bar input[type=button].active
 {
-    -webkit-filter: grayscale(0);
-    filter: none;
     color: black!important;
 }
 #pencil_button_bar
 {
     position: fixed;
-    top: 1px;
+    bottom: 20px;
     right: 1px;
     z-index: 1000;
     font-family: "Arial Unicode MS", unifont, "Everson Mono", tahoma, arial;
 }
 #pencil_button_bar input[type=button]
 {
-    filter: gray;
-    -webkit-filter: grayscale(1);
-    filter: grayscale(1);
     border: 1px solid black;
     margin: 0 1px;
     display: inline-block;
@@ -235,6 +228,7 @@ ts_blackboard = u"""
     height: 50px;
     border-radius: 8px;
     background-color: rgba(250,250,250,0.5)!important;
+    color: black;
     color: #ccc!important;
 }
 .night_mode #pencil_button_bar input[type=button]{
@@ -245,7 +239,8 @@ ts_blackboard = u"""
 }
 #canvas_wrapper
 {
-    height: 100px
+    height: 0px;
+    width: 0px;
 }
 </style>
 
@@ -304,16 +299,16 @@ function switch_class(e,c)
 
 function resize() {
     var card = document.getElementsByClassName('card')[0]
-    ctx.canvas.width = document.documentElement.scrollWidth - 1;
+    ctx.canvas.width = document.documentElement.scrollWidth - 20;
     ctx.canvas.height = Math.max(
         document.body.clientHeight,
         window.innerHeight,
         document.documentElement ? document.documentElement.scrollHeight : 0,
         card ? card.scrollHeight : 0
-    ) - 1;
+    ) - 20;
 
     canvas.style.height = ctx.canvas.height + 'px';
-    wrapper.style.width = ctx.canvas.width + 'px';
+    // wrapper.style.width = ctx.canvas.width + 'px';
     update_pen_settings()
 }
 
@@ -384,12 +379,25 @@ canvas.addEventListener("mousemove",function (e) {
 });
 
 document.addEventListener('keyup', function(e) {
-    // Z or z
-    if ((e.keyCode == 90 || e.keyCode == 122) && e.altKey) {
+    // '
+    if (e.key === "'") {
+        switch_visibility()
+    }
+})
+
+document.addEventListener('keyup', function(e) {
+    // ,
+    if (e.key === ",") {
         ts_undo()
     }
 })
 
+document.addEventListener('keyup', function(e) {
+    // i
+    if (e.key === ".") {
+        clear_canvas()
+    }
+})
 </script>
 """
 
@@ -496,7 +504,7 @@ def ts_setup_menu():
     ts_menu_opacity = QAction(_('Set pen &opacity'), mw)
     ts_menu_about = QAction(_('&About...'), mw)
 
-    ts_toggle_seq = QKeySequence("Ctrl+r")
+    ts_toggle_seq = QKeySequence("Alt+p")
     ts_menu_switch.setShortcut(ts_toggle_seq)
 
     mw.ts_menu.addAction(ts_menu_switch)
