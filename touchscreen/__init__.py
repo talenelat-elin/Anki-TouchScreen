@@ -185,7 +185,7 @@ ts_blackboard = u"""
     <canvas id="main_canvas" width="100" height="100" style="display: none; cursor: crosshair;"></canvas>
 </div>
 <div id="pencil_button_bar">
-    <input type="button" class="active" onclick="active=!active;switch_visibility();switch_class(this, 'active');" value="\u270D" title="Toggle visiblity">
+    <input type="button" class="active" onclick="active=!active;switch_visibility();switch_class(this, 'active');" value="🖉" title="Toggle visiblity">
     <input type="button" onclick="ts_undo();" value="\u21B6" title="Undo the last stroke" id="ts_undo_button">
     <input type="button" class="active" onclick="clear_canvas();" value="\u2715" title="Clean whiteboard">
 </div>
@@ -222,11 +222,11 @@ ts_blackboard = u"""
     margin: 0 1px;
     display: inline-block;
     float: left;
-    width: 90px!important;
+    width: 45px!important;
     font-size: 130%;
     line-height: 130%;
-    height: 50px;
-    border-radius: 8px;
+    height: 25px;
+    border-radius: 4px;
     background-color: rgba(250,250,250,0.5)!important;
     color: black;
     color: #ccc!important;
