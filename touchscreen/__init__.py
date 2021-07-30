@@ -298,17 +298,15 @@ function switch_class(e,c)
 }
 
 function resize() {
-    var card = document.getElementsByClassName('card')[0]
-    ctx.canvas.width = document.documentElement.scrollWidth - 20;
+    var card = document.getElementById('qa')
+    ctx.canvas.width = document.documentElement.offsetWidth - 30;
     ctx.canvas.height = Math.max(
         document.body.clientHeight,
         window.innerHeight,
-        document.documentElement ? document.documentElement.scrollHeight : 0,
         card ? card.scrollHeight : 0
     ) - 20;
-
     canvas.style.height = ctx.canvas.height + 'px';
-    // wrapper.style.width = ctx.canvas.width + 'px';
+    canvas.style.width =ctx.canvas.width + 'px';
     update_pen_settings()
 }
 
@@ -393,7 +391,7 @@ document.addEventListener('keyup', function(e) {
 })
 
 document.addEventListener('keyup', function(e) {
-    // i
+    // .
     if (e.key === ".") {
         clear_canvas()
     }
